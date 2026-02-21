@@ -17,10 +17,10 @@ if (!class_exists('BootstrapBasicWp5')) {
         public function __construct()
         {
             // Add Bootstrap styles into Gutenberg editor.
-            add_action('enqueue_block_editor_assets', array($this, 'enqueueBlockEditorAssets'));
+            add_action('enqueue_block_editor_assets', [$this, 'enqueueBlockEditorAssets']);
 
             // Add Bootstrap styles into editor.
-            add_action('admin_init', array($this, 'addEditorStyles'));
+            add_action('admin_init', [$this, 'addEditorStyles']);
         }// __construct
 
 
@@ -30,7 +30,7 @@ if (!class_exists('BootstrapBasicWp5')) {
         public function addEditorStyles()
         {
             if (function_exists('add_editor_style')) {
-                add_editor_style('css/bootstrap.min.css');
+                add_editor_style('assets/css/bootstrap.min.css');
             }
         }// addEditorStyles
 
@@ -44,7 +44,18 @@ if (!class_exists('BootstrapBasicWp5')) {
                 $BootstrapBasic = new BootstrapBasic();
                 $BootstrapBasic->registerCommonStyles();
             }
-            wp_enqueue_style('bootstrap-style');
+
+            /**
+             * Use modern Bootstrap or not.
+             * 
+             * @see `bootstrapBasicEnqueueScripts()` function for more details.
+             */
+            $useModernBootstrap = apply_filters('bootstrap_basic_use_modern_bootstrap', false);
+            if (true === $useModernBootstrap) {
+                wp_enqueue_style('bootstrap-basic-modern-bootstrap-style');
+            } else {
+                wp_enqueue_style('bootstrap-style');
+            }
         }// enqueueBlockEditorAssets
 
 
