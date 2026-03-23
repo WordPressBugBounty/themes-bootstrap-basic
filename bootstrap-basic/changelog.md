@@ -1,6 +1,16 @@
 # Theme change log.
 Started since v1.1
 
+### v1.3.6
+2026-03-23
+
+* Hot fix "Uncaught ArgumentCountError: is_array() expects exactly 1 argument, 2 given".
+
+### v1.3.5
+2026-03-23
+
+* Update as per PHPCS's instructions.
+
 ### v1.3.4
 2026-03-05
 
